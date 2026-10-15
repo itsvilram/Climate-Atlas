@@ -1,6 +1,6 @@
 # GitHub history and Vercel deployment plan
 
-Status: plan prepared; no Git repository, commits, GitHub push, or deployment created.
+Status: local repository initialized and six reconstructed phase commits prepared; GitHub push remains pending. User reports existing FastAPI and React Vercel apps; their configuration was not changed or independently verified during commit preparation.
 Date: 15 October 2026.
 
 ## Goal and order
@@ -11,7 +11,7 @@ reviewed history first, then connect GitHub to Vercel and verify the deployment.
 Do not create a single commit containing the whole application. Do not backdate
 commits or imply that the reconstructed phase history existed during development.
 
-The current workspace is not a Git repository. The application already exists as
+The workspace was not a Git repository when this plan was prepared. The application already exists as
 a final working tree, so phase commits must be composed deliberately, including
 earlier versions of shared files where needed. Simply staging folders will not
 produce meaningful, buildable phases.
@@ -148,11 +148,14 @@ can be inferred from those local checks.
 ## Completion checklist
 
 - [ ] Publishable manifest and complete-history private-data audit pass.
-- [ ] Six coherent phase commits exist and applicable snapshot checks pass.
+- [x] Six coherent local phase commits exist and applicable snapshot checks pass.
 - [ ] Reviewed history is pushed to the intended GitHub repository.
 - [ ] Backend hosting compatibility and any required adaptations are verified.
 - [ ] Vercel project uses the intended repository, branch, root, and public API URL.
 - [ ] Real deployed checks pass and actual URLs/commit/evidence are documented.
 
-Execution has not started. Repository/account details and the backend arrangement
-must be resolved from available context before dependent external actions.
+Local commit preparation is complete. Phase snapshots were checked without changing application working files. GitHub remote/push and verification of the user-reported Vercel apps remain separate next steps.
+
+## Local phase snapshot verification
+
+The history is reconstructed from the existing completed application, using the configured Git author and current timestamps. Backend phase snapshots passed 92, 186, and 240 tests. Frontend phase snapshots passed 16, 20, and 21 Node/SSR tests respectively, plus their TypeScript/build, OpenAPI drift, and client-bundle checks. Earlier snapshots were validated in isolated temporary checkouts; the final application working files were preserved. The previously completed eight-browser-test evidence applies to the unchanged final application. Only local commits were created; no GitHub push or Vercel change was performed.

@@ -11,6 +11,7 @@
     "check:api": "node scripts/generate-api.mjs --check",
     "check:client-bundle": "node scripts/check-client-bundle.mjs",
     "test": "node --experimental-strip-types --test tests/*.test.ts tests/*.test.mjs",
+    "test:browser": "playwright test",
     "dev": "vite --host 127.0.0.1",
     "typecheck": "tsc --noEmit",
     "build": "npm run typecheck && vite build",
@@ -24,6 +25,8 @@
     "recharts": "3.10.1"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.64.1",
     "@types/node": "^24.19.2",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",

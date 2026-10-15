@@ -4,7 +4,7 @@
   --paper: #fff; --ink: #263a37; --muted: #62716d; --teal: #17665c;
   --border: #dce3db; --amber: #815b17; --radius: 12px;
   --space-1: 8px; --space-2: 16px; --space-3: 24px; --space-4: 32px; --space-5: 48px;
-  --focus: #17665c; --control-border: #dce3db;
+  --focus: #17665c; --control-border: #74877f;
 }
 * { box-sizing: border-box; }
 body { margin: 0; min-width: 280px; }

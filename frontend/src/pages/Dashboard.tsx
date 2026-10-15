@@ -28,7 +28,7 @@ export default function Dashboard() {
         <span>Climate Atlas<span className="brand-caption">HISTORICAL HEATWAVE EXPLORER</span></span></a>
       <a className="text-link" href="#methodology">About the method <span aria-hidden="true">↗</span></a>
     </div></header>
-    <main id="main" className="dashboard">
+    <main id="main" className="dashboard" tabIndex={-1}>
       <div className="page-intro"><div><p className="eyebrow">CLIMATE / HEATWAVES</p>
         <h1>A clearer view of extreme heat.</h1>
         <p className="intro-copy">Explore historical heatwave patterns across Indian cities, with the evidence and limitations in view.</p>
