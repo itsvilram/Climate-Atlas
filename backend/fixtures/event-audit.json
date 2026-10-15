@@ -1,0 +1,458 @@
+{
+  "threshold_celsius": 41.5,
+  "baseline_valid_days": 11323,
+  "samples": [
+    {
+      "start_date": "1990-05-24",
+      "end_date": "1990-05-26",
+      "daily_max_celsius": [
+        42.9,
+        42.2,
+        41.7
+      ],
+      "preceding_day_celsius": 41.0,
+      "following_day_celsius": 41.5,
+      "mean_exceedance_celsius": 0.766666666666668
+    },
+    {
+      "start_date": "2005-05-19",
+      "end_date": "2005-05-21",
+      "daily_max_celsius": [
+        42.1,
+        42.2,
+        41.9
+      ],
+      "preceding_day_celsius": 41.0,
+      "following_day_celsius": 40.3,
+      "mean_exceedance_celsius": 0.5666666666666677
+    },
+    {
+      "start_date": "2020-05-22",
+      "end_date": "2020-05-27",
+      "daily_max_celsius": [
+        42.5,
+        42.8,
+        43.3,
+        43.6,
+        44.8,
+        44.2
+      ],
+      "preceding_day_celsius": 41.1,
+      "following_day_celsius": 39.0,
+      "mean_exceedance_celsius": 2.0333333333333328
+    }
+  ],
+  "captured_at": "2026-10-15T12:04:17.389328+00:00",
+  "origin": "Real local ASGI API backed by Atlas and Open-Meteo ERA5; not deployed",
+  "repeat_additional_provider_requests": 0,
+  "source": {
+    "provider": "Open-Meteo",
+    "url": "https://open-meteo.com/",
+    "licence": "https://creativecommons.org/licenses/by/4.0/",
+    "dataset": "ERA5 reanalysis",
+    "changes": "Calendar reconstructed; missing/invalid observations retained as null with flags.",
+    "model": "era5",
+    "coordinate_version": "1",
+    "weather_schema_version": 1,
+    "generated_at": "2026-10-15T11:44:08.345061Z",
+    "analysis_cache_status": "hit",
+    "weather_years": [
+      {
+        "year": 1989,
+        "revision": "ff01660e4a33193f6eb47ff282d7a5d48e96135fa1c7f53c3cad55d66f3f5fe9",
+        "fetched_at": "2026-10-15T11:42:38.605000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 1990,
+        "revision": "584c588d0413a2abb92abd55cbccfd126f0462a7bfbce1870cdde7c5d8ee239d",
+        "fetched_at": "2026-10-15T11:42:40.947000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 1991,
+        "revision": "35f14e283f2a794f669379fdb7edb9cafc9974c6e10a0a7aa9d98e2dade87d3d",
+        "fetched_at": "2026-10-15T11:42:43.941000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 1992,
+        "revision": "05d9c5e577f96370c94d5c79c01b7dba85c66947fb0731290fcb8598b474b47b",
+        "fetched_at": "2026-10-15T11:42:46.945000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 1993,
+        "revision": "bc2be52b034cded2d4cd7739e6a75a980a247e3765a7427489fd5688e7c859c0",
+        "fetched_at": "2026-10-15T11:42:49.928000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 1994,
+        "revision": "8a3bd1088ef95779bcd9185aba21124808714d2ac207c9c4c91966500455d903",
+        "fetched_at": "2026-10-15T11:42:52.960000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 1995,
+        "revision": "ebfaf840256342a5bf065de21484b8a4f99aa53eb5085d44137dc2c63a79931b",
+        "fetched_at": "2026-10-15T11:42:55.953000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 1996,
+        "revision": "75a1ddc75677a762f4069187805ad6a01b4e906eddf76abb8ed25f0bc35fd389",
+        "fetched_at": "2026-10-15T11:42:58.958000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 1997,
+        "revision": "9070f53e4271d8a5a632b2431a47caa2712c6026ed49056363b18e4594d46c45",
+        "fetched_at": "2026-10-15T11:43:01.958000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 1998,
+        "revision": "d68633a6ec38fe053f12e2faaac65782fc6e1e03b53a0f14c87d28afaab821b9",
+        "fetched_at": "2026-10-15T11:43:04.958000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 1999,
+        "revision": "0f67e9bfd656175ab640744fdaf9aed154ec0d2109d3a0e020ccfd814a7cbbcd",
+        "fetched_at": "2026-10-15T11:43:07.984000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 2000,
+        "revision": "b5f4967077a35c59e364eed9a507e605e5f35fd360afe8e695abee6667f00150",
+        "fetched_at": "2026-10-15T11:43:10.987000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 2001,
+        "revision": "c10f2c0d80f9caf60d58c898e2a7a07b75cb91e4dd712cff7019f853dd63db4c",
+        "fetched_at": "2026-10-15T11:43:13.985000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 2002,
+        "revision": "ec3edc9a21dc0e96be24162b0398062a71faad6dbf6175838cb0343d3c6e65b0",
+        "fetched_at": "2026-10-15T11:43:16.987000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 2003,
+        "revision": "18eab08dff85ceee9dad501784901ccbe0c7973eab9f753d926846fbb69cea56",
+        "fetched_at": "2026-10-15T11:43:19.984000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 2004,
+        "revision": "623dd85abb51e35a87b56796f9fedbbd81587fda96f46e1da8577e89292b51ca",
+        "fetched_at": "2026-10-15T11:43:22.979000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 2005,
+        "revision": "e87135d0d4c76e9a49772b6ff94b9114451c29e027224e085eef15020012e402",
+        "fetched_at": "2026-10-15T11:43:25.982000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 2006,
+        "revision": "a2893a5abd6658950e95ca0c6224a8e545e197e3dc8c1181cd117b8993f2ba01",
+        "fetched_at": "2026-10-15T11:43:28.995000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 2007,
+        "revision": "939710bdf04c37401e3587b4a40f04c7e426985ed98ffa84342e92bfe05b0d0e",
+        "fetched_at": "2026-10-15T11:43:32.011000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 2008,
+        "revision": "b2fc80f8493966e1ada5c104462657cdfca1551eb7eb510e1904f965fa60b38d",
+        "fetched_at": "2026-10-15T11:43:35.016000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 2009,
+        "revision": "84383f7b79cdbf4e723d76528b2ee07ddd12ab8a78d179e2f25ca3f2bb7f1ecd",
+        "fetched_at": "2026-10-15T11:43:38.023000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 2010,
+        "revision": "e45b27d9437c582fa2c41b6d14beff00fdb940615b28d3d4d359489b7db758aa",
+        "fetched_at": "2026-10-15T11:43:41.013000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 2011,
+        "revision": "dbdcea9ee691c2f72bf15326d7f35361bf436bc5f9af8dffaf02b04d7a8fef78",
+        "fetched_at": "2026-10-15T11:43:44.022000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 2012,
+        "revision": "d43a13c589e6e2cbd3965e2ac8ae9169fe1630ef1031afefe4ad54079ccdf3a1",
+        "fetched_at": "2026-10-15T11:43:47.021000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 2013,
+        "revision": "f375d63049120b422c6ea9aa4a8300090ba9a3dd7aa9e4cabbeb78645480f65e",
+        "fetched_at": "2026-10-15T11:43:50.014000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 2014,
+        "revision": "38e99d7085b01331c9dc4df93111aac2cb8f1e1bf620dd0684ef30c338f8329c",
+        "fetched_at": "2026-10-15T11:43:53.018000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 2015,
+        "revision": "f1a0a8433be3318d3982994343c2886709e7ac7d9ad911d8d2e1bf617651c11b",
+        "fetched_at": "2026-10-15T11:43:56.049000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 2016,
+        "revision": "1357f602e39889fec3f89dbc4d6c06e854614232b4ad787453ddd239c82dd5d0",
+        "fetched_at": "2026-10-15T11:43:59.070000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 2017,
+        "revision": "15807940eb6c1db82eb4dcf3f2678e93745871aa8de0f676a655b8acd5a01aa8",
+        "fetched_at": "2026-10-15T11:44:02.080000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 2018,
+        "revision": "4d2c699222898068baba8acd9758e444212e1e77d91db0dcf713721f1833e28d",
+        "fetched_at": "2026-10-15T11:44:05.096000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 2019,
+        "revision": "e898155731158608032608a302593c2d9fa55b48c9eb0efd1b3ef08cae3a98d3",
+        "fetched_at": "2026-10-15T11:44:08.100000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 2020,
+        "revision": "27f5b9c384d0b5673b83498e997e83a1f9392dfaebcd2d4d2e868d304ca684b9",
+        "fetched_at": "2026-10-15T06:09:31.508000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      },
+      {
+        "year": 2021,
+        "revision": "394b34c3583304d24e27cfe70bfdffd052034b1f47f51ca70dc35a3962c95636",
+        "fetched_at": "2026-10-15T06:09:33.132000Z",
+        "cache_status": "hit",
+        "grid_coordinates": {
+          "latitude": 28.5,
+          "longitude": 77.25
+        },
+        "timezone": "Asia/Kolkata",
+        "coverage": 1.0
+      }
+    ]
+  }
+}

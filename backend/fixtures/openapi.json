@@ -1,0 +1,1371 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Climate Hazard Trend Analyzer",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/v1/analyses": {
+      "post": {
+        "summary": "Analyze",
+        "operationId": "analyze_api_v1_analyses_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Selection"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnalysisResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "408": {
+            "description": "Request Timeout",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Request Entity Too Large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Gateway Timeout",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/health": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health_api_v1_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/regions": {
+      "get": {
+        "summary": "Regions",
+        "operationId": "regions_api_v1_regions_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegionsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AnalysisRegion": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": [
+              "delhi",
+              "mumbai",
+              "bengaluru",
+              "chennai",
+              "hyderabad"
+            ],
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "latitude": {
+            "type": "number",
+            "title": "Latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "title": "Longitude"
+          },
+          "timezone": {
+            "type": "string",
+            "title": "Timezone"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "latitude",
+          "longitude",
+          "timezone"
+        ],
+        "title": "AnalysisRegion"
+      },
+      "AnalysisResponse": {
+        "properties": {
+          "region": {
+            "$ref": "#/components/schemas/AnalysisRegion"
+          },
+          "period": {
+            "$ref": "#/components/schemas/Period"
+          },
+          "methodology": {
+            "$ref": "#/components/schemas/Methodology"
+          },
+          "summary": {
+            "$ref": "#/components/schemas/Summary"
+          },
+          "annual_metrics": {
+            "items": {
+              "$ref": "#/components/schemas/AnnualMetrics"
+            },
+            "type": "array",
+            "title": "Annual Metrics"
+          },
+          "trend": {
+            "$ref": "#/components/schemas/Trend"
+          },
+          "events": {
+            "items": {
+              "$ref": "#/components/schemas/Event"
+            },
+            "type": "array",
+            "title": "Events"
+          },
+          "insights": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Insights"
+          },
+          "data_quality": {
+            "$ref": "#/components/schemas/DataQuality"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "region",
+          "period",
+          "methodology",
+          "summary",
+          "annual_metrics",
+          "trend",
+          "events",
+          "insights",
+          "data_quality",
+          "source"
+        ],
+        "title": "AnalysisResponse"
+      },
+      "AnnualMetrics": {
+        "properties": {
+          "year": {
+            "type": "integer",
+            "title": "Year"
+          },
+          "expected_days": {
+            "type": "integer",
+            "title": "Expected Days"
+          },
+          "valid_days": {
+            "type": "integer",
+            "title": "Valid Days"
+          },
+          "coverage": {
+            "type": "number",
+            "title": "Coverage"
+          },
+          "event_count": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Event Count"
+          },
+          "heatwave_days": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Heatwave Days"
+          },
+          "mean_duration_days": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mean Duration Days"
+          },
+          "max_duration_days": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Duration Days"
+          },
+          "mean_exceedance_celsius": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mean Exceedance Celsius"
+          },
+          "peak_temperature_celsius": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Peak Temperature Celsius"
+          },
+          "complete": {
+            "type": "boolean",
+            "title": "Complete"
+          },
+          "partial": {
+            "type": "boolean",
+            "title": "Partial"
+          },
+          "incomplete_reasons": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Incomplete Reasons"
+          },
+          "rolling_average_event_count": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rolling Average Event Count"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "year",
+          "expected_days",
+          "valid_days",
+          "coverage",
+          "event_count",
+          "heatwave_days",
+          "mean_duration_days",
+          "max_duration_days",
+          "mean_exceedance_celsius",
+          "peak_temperature_celsius",
+          "complete",
+          "partial",
+          "incomplete_reasons",
+          "rolling_average_event_count"
+        ],
+        "title": "AnnualMetrics"
+      },
+      "BaselineQuality": {
+        "properties": {
+          "expected_days": {
+            "type": "integer",
+            "title": "Expected Days"
+          },
+          "valid_days": {
+            "type": "integer",
+            "title": "Valid Days"
+          },
+          "coverage": {
+            "type": "number",
+            "title": "Coverage"
+          },
+          "years": {
+            "items": {
+              "$ref": "#/components/schemas/Coverage"
+            },
+            "type": "array",
+            "title": "Years"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_days",
+          "valid_days",
+          "coverage",
+          "years"
+        ],
+        "title": "BaselineQuality"
+      },
+      "Comparison": {
+        "properties": {
+          "first_window": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ComparisonWindow"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "last_window": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ComparisonWindow"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "absolute_change_events_per_year": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Absolute Change Events Per Year"
+          },
+          "percent_change": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Percent Change"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "percentage_unavailable_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Percentage Unavailable Reason"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "first_window",
+          "last_window",
+          "absolute_change_events_per_year",
+          "percent_change",
+          "reason",
+          "percentage_unavailable_reason"
+        ],
+        "title": "Comparison"
+      },
+      "ComparisonWindow": {
+        "properties": {
+          "start_year": {
+            "type": "integer",
+            "title": "Start Year"
+          },
+          "end_year": {
+            "type": "integer",
+            "title": "End Year"
+          },
+          "mean_event_count": {
+            "type": "number",
+            "title": "Mean Event Count"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "start_year",
+          "end_year",
+          "mean_event_count"
+        ],
+        "title": "ComparisonWindow"
+      },
+      "Coordinates": {
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "title": "Latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "title": "Longitude"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "latitude",
+          "longitude"
+        ],
+        "title": "Coordinates"
+      },
+      "CountingMetadata": {
+        "properties": {
+          "event_count": {
+            "type": "string",
+            "title": "Event Count"
+          },
+          "duration": {
+            "type": "string",
+            "title": "Duration"
+          },
+          "heatwave_days": {
+            "type": "string",
+            "title": "Heatwave Days"
+          },
+          "intensity": {
+            "type": "string",
+            "title": "Intensity"
+          },
+          "peak": {
+            "type": "string",
+            "title": "Peak"
+          },
+          "boundary_policy": {
+            "type": "string",
+            "title": "Boundary Policy"
+          },
+          "units": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Units"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "event_count",
+          "duration",
+          "heatwave_days",
+          "intensity",
+          "peak",
+          "boundary_policy",
+          "units"
+        ],
+        "title": "CountingMetadata"
+      },
+      "Coverage": {
+        "properties": {
+          "year": {
+            "type": "integer",
+            "title": "Year"
+          },
+          "expected_days": {
+            "type": "integer",
+            "title": "Expected Days"
+          },
+          "valid_days": {
+            "type": "integer",
+            "title": "Valid Days"
+          },
+          "coverage": {
+            "type": "number",
+            "title": "Coverage"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "year",
+          "expected_days",
+          "valid_days",
+          "coverage"
+        ],
+        "title": "Coverage"
+      },
+      "DataQuality": {
+        "properties": {
+          "warnings": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Warnings"
+          },
+          "incomplete_years": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "title": "Incomplete Years"
+          },
+          "excluded_boundary_events": {
+            "items": {
+              "$ref": "#/components/schemas/Event"
+            },
+            "type": "array",
+            "title": "Excluded Boundary Events"
+          },
+          "counting_metadata": {
+            "$ref": "#/components/schemas/CountingMetadata"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "warnings",
+          "incomplete_years",
+          "excluded_boundary_events",
+          "counting_metadata"
+        ],
+        "title": "DataQuality"
+      },
+      "ErrorBody": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "details": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ValidationDetail"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Details"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "ErrorBody"
+      },
+      "ErrorResponse": {
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/ErrorBody"
+          }
+        },
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "title": "ErrorResponse"
+      },
+      "Event": {
+        "properties": {
+          "observed_start_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Observed Start Date"
+          },
+          "observed_end_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Observed End Date"
+          },
+          "observed_duration_days": {
+            "type": "integer",
+            "title": "Observed Duration Days"
+          },
+          "start_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start Date"
+          },
+          "end_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End Date"
+          },
+          "duration_days": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Duration Days"
+          },
+          "peak_temperature_celsius": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Peak Temperature Celsius"
+          },
+          "mean_exceedance_celsius": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mean Exceedance Celsius"
+          },
+          "observed_peak_temperature_celsius": {
+            "type": "number",
+            "title": "Observed Peak Temperature Celsius"
+          },
+          "observed_mean_exceedance_celsius": {
+            "type": "number",
+            "title": "Observed Mean Exceedance Celsius"
+          },
+          "truncated_start": {
+            "type": "boolean",
+            "title": "Truncated Start"
+          },
+          "truncated_end": {
+            "type": "boolean",
+            "title": "Truncated End"
+          },
+          "qualification_confirmed": {
+            "type": "boolean",
+            "title": "Qualification Confirmed"
+          },
+          "started_in_selection": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Started In Selection"
+          },
+          "eligible_for_complete_metrics": {
+            "type": "boolean",
+            "title": "Eligible For Complete Metrics"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "observed_start_date",
+          "observed_end_date",
+          "observed_duration_days",
+          "start_date",
+          "end_date",
+          "duration_days",
+          "peak_temperature_celsius",
+          "mean_exceedance_celsius",
+          "observed_peak_temperature_celsius",
+          "observed_mean_exceedance_celsius",
+          "truncated_start",
+          "truncated_end",
+          "qualification_confirmed",
+          "started_in_selection",
+          "eligible_for_complete_metrics"
+        ],
+        "title": "Event"
+      },
+      "HealthResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "ok",
+            "title": "Status",
+            "default": "ok"
+          }
+        },
+        "type": "object",
+        "title": "HealthResponse"
+      },
+      "Methodology": {
+        "properties": {
+          "baseline_start_year": {
+            "type": "integer",
+            "title": "Baseline Start Year"
+          },
+          "baseline_end_year": {
+            "type": "integer",
+            "title": "Baseline End Year"
+          },
+          "percentile": {
+            "type": "integer",
+            "title": "Percentile"
+          },
+          "percentile_method": {
+            "type": "string",
+            "const": "linear",
+            "title": "Percentile Method"
+          },
+          "threshold_method_version": {
+            "type": "string",
+            "title": "Threshold Method Version"
+          },
+          "threshold_celsius": {
+            "type": "number",
+            "title": "Threshold Celsius"
+          },
+          "temperature_variable": {
+            "type": "string",
+            "const": "temperature_2m_max",
+            "title": "Temperature Variable"
+          },
+          "temperature_unit": {
+            "type": "string",
+            "title": "Temperature Unit"
+          },
+          "comparison": {
+            "type": "string",
+            "const": ">",
+            "title": "Comparison"
+          },
+          "minimum_coverage": {
+            "type": "number",
+            "title": "Minimum Coverage"
+          },
+          "seasonal_adjustment": {
+            "type": "boolean",
+            "const": false,
+            "title": "Seasonal Adjustment"
+          },
+          "limitation": {
+            "type": "string",
+            "title": "Limitation"
+          },
+          "baseline_quality": {
+            "$ref": "#/components/schemas/BaselineQuality"
+          },
+          "method_version": {
+            "type": "string",
+            "title": "Method Version"
+          },
+          "minimum_run_days": {
+            "type": "integer",
+            "const": 3,
+            "title": "Minimum Run Days"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "baseline_start_year",
+          "baseline_end_year",
+          "percentile",
+          "percentile_method",
+          "threshold_method_version",
+          "threshold_celsius",
+          "temperature_variable",
+          "temperature_unit",
+          "comparison",
+          "minimum_coverage",
+          "seasonal_adjustment",
+          "limitation",
+          "baseline_quality",
+          "method_version",
+          "minimum_run_days"
+        ],
+        "title": "Methodology"
+      },
+      "Period": {
+        "properties": {
+          "start_year": {
+            "type": "integer",
+            "title": "Start Year"
+          },
+          "end_year": {
+            "type": "integer",
+            "title": "End Year"
+          },
+          "hazard": {
+            "type": "string",
+            "const": "heatwave",
+            "title": "Hazard"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "start_year",
+          "end_year",
+          "hazard"
+        ],
+        "title": "Period"
+      },
+      "Region": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": [
+              "delhi",
+              "mumbai",
+              "bengaluru",
+              "chennai",
+              "hyderabad"
+            ],
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "latitude": {
+            "type": "number",
+            "title": "Latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "title": "Longitude"
+          },
+          "timezone": {
+            "type": "string",
+            "title": "Timezone"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "latitude",
+          "longitude",
+          "timezone"
+        ],
+        "title": "Region"
+      },
+      "RegionsResponse": {
+        "properties": {
+          "regions": {
+            "items": {
+              "$ref": "#/components/schemas/Region"
+            },
+            "type": "array",
+            "title": "Regions"
+          },
+          "supported_years": {
+            "$ref": "#/components/schemas/SupportedYears"
+          },
+          "defaults": {
+            "$ref": "#/components/schemas/Selection"
+          }
+        },
+        "type": "object",
+        "required": [
+          "regions"
+        ],
+        "title": "RegionsResponse"
+      },
+      "Regression": {
+        "properties": {
+          "slope_events_per_decade": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Slope Events Per Decade"
+          },
+          "fit_year_count": {
+            "type": "integer",
+            "title": "Fit Year Count"
+          },
+          "fit_years": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "title": "Fit Years"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "interpretation": {
+            "type": "string",
+            "title": "Interpretation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "slope_events_per_decade",
+          "fit_year_count",
+          "fit_years",
+          "reason",
+          "interpretation"
+        ],
+        "title": "Regression"
+      },
+      "Selection": {
+        "properties": {
+          "region_id": {
+            "type": "string",
+            "enum": [
+              "delhi",
+              "mumbai",
+              "bengaluru",
+              "chennai",
+              "hyderabad"
+            ],
+            "title": "Region Id",
+            "default": "delhi"
+          },
+          "start_year": {
+            "type": "integer",
+            "maximum": 2025.0,
+            "minimum": 1990.0,
+            "title": "Start Year",
+            "default": 1990
+          },
+          "end_year": {
+            "type": "integer",
+            "maximum": 2025.0,
+            "minimum": 1990.0,
+            "title": "End Year",
+            "default": 2020
+          },
+          "hazard": {
+            "type": "string",
+            "const": "heatwave",
+            "title": "Hazard",
+            "default": "heatwave"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "Selection"
+      },
+      "Source": {
+        "properties": {
+          "provider": {
+            "type": "string",
+            "const": "Open-Meteo",
+            "title": "Provider"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "licence": {
+            "type": "string",
+            "title": "Licence"
+          },
+          "dataset": {
+            "type": "string",
+            "title": "Dataset"
+          },
+          "changes": {
+            "type": "string",
+            "title": "Changes"
+          },
+          "model": {
+            "type": "string",
+            "const": "era5",
+            "title": "Model"
+          },
+          "coordinate_version": {
+            "type": "string",
+            "title": "Coordinate Version"
+          },
+          "weather_schema_version": {
+            "type": "integer",
+            "title": "Weather Schema Version"
+          },
+          "generated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Generated At"
+          },
+          "analysis_cache_status": {
+            "type": "string",
+            "enum": [
+              "computed",
+              "hit",
+              "coalesced"
+            ],
+            "title": "Analysis Cache Status"
+          },
+          "weather_years": {
+            "items": {
+              "$ref": "#/components/schemas/WeatherSource"
+            },
+            "type": "array",
+            "title": "Weather Years"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "provider",
+          "url",
+          "licence",
+          "dataset",
+          "changes",
+          "model",
+          "coordinate_version",
+          "weather_schema_version",
+          "generated_at",
+          "analysis_cache_status",
+          "weather_years"
+        ],
+        "title": "Source"
+      },
+      "Summary": {
+        "properties": {
+          "event_count": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Event Count"
+          },
+          "heatwave_days": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Heatwave Days"
+          },
+          "mean_duration_days": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mean Duration Days"
+          },
+          "max_duration_days": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Duration Days"
+          },
+          "mean_exceedance_celsius": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mean Exceedance Celsius"
+          },
+          "peak_temperature_celsius": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Peak Temperature Celsius"
+          },
+          "complete": {
+            "type": "boolean",
+            "title": "Complete"
+          },
+          "partial": {
+            "type": "boolean",
+            "title": "Partial"
+          },
+          "eligible_year_count": {
+            "type": "integer",
+            "title": "Eligible Year Count"
+          },
+          "selected_year_count": {
+            "type": "integer",
+            "title": "Selected Year Count"
+          },
+          "excluded_boundary_event_count": {
+            "type": "integer",
+            "title": "Excluded Boundary Event Count"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "event_count",
+          "heatwave_days",
+          "mean_duration_days",
+          "max_duration_days",
+          "mean_exceedance_celsius",
+          "peak_temperature_celsius",
+          "complete",
+          "partial",
+          "eligible_year_count",
+          "selected_year_count",
+          "excluded_boundary_event_count"
+        ],
+        "title": "Summary"
+      },
+      "SupportedYears": {
+        "properties": {
+          "min": {
+            "type": "integer",
+            "title": "Min",
+            "default": 1990
+          },
+          "max": {
+            "type": "integer",
+            "title": "Max",
+            "default": 2025
+          }
+        },
+        "type": "object",
+        "title": "SupportedYears"
+      },
+      "Trend": {
+        "properties": {
+          "regression": {
+            "$ref": "#/components/schemas/Regression"
+          },
+          "comparison": {
+            "$ref": "#/components/schemas/Comparison"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "regression",
+          "comparison"
+        ],
+        "title": "Trend"
+      },
+      "ValidationDetail": {
+        "properties": {
+          "field": {
+            "type": "string",
+            "title": "Field"
+          },
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "field",
+          "code",
+          "message"
+        ],
+        "title": "ValidationDetail"
+      },
+      "WeatherSource": {
+        "properties": {
+          "year": {
+            "type": "integer",
+            "title": "Year"
+          },
+          "revision": {
+            "type": "string",
+            "title": "Revision"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Fetched At"
+          },
+          "cache_status": {
+            "type": "string",
+            "enum": [
+              "hit",
+              "fetched",
+              "refreshed",
+              "stale"
+            ],
+            "title": "Cache Status"
+          },
+          "grid_coordinates": {
+            "$ref": "#/components/schemas/Coordinates"
+          },
+          "timezone": {
+            "type": "string",
+            "title": "Timezone"
+          },
+          "coverage": {
+            "type": "number",
+            "title": "Coverage"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "year",
+          "revision",
+          "fetched_at",
+          "cache_status",
+          "grid_coordinates",
+          "timezone",
+          "coverage"
+        ],
+        "title": "WeatherSource"
+      }
+    }
+  }
+}
