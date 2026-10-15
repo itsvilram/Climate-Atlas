@@ -1,0 +1,2 @@
+# Keep generated contracts and source reproducible across Windows and CI.
+* text=auto eol=lf
