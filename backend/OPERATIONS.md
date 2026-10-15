@@ -109,3 +109,15 @@ prove free-tier or public-host compatibility. No deployment/submission occurred.
 The opt-in verifier selects an alternate city missing required context, retains
 real weather/results in Atlas, checks the chosen budget, and verifies warm reuse.
 It never deletes cache records to fabricate a cold request.
+
+## Database startup diagnostics
+
+Failed startup emits `database_startup_failed stage=... reason=... timeout_ms=...`
+to the server log, with closed categories only. Stages identify client configuration,
+ping, or index creation. Reasons distinguish authentication, permissions, URI/DNS,
+TLS certificate/handshake, unreachable-server timeout, and index conflicts. No
+driver message, hostname, connection string, or credentials are logged. Startup
+still fails when database initialization fails; this does not bypass persistence
+requirements or TLS verification. This deployment diagnostic change passes all
+252 backend tests, including credential-canary checks. Existing earlier test
+totals in verification reports describe their original runs.

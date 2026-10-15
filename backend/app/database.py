@@ -1,10 +1,13 @@
 """One pooled synchronous MongoClient per running service instance."""
 
+import logging
+
 from pymongo import ASCENDING, MongoClient, timeout
 from pymongo.errors import PyMongoError
 from fastapi import Request
 
 from .config import Settings
+from .database_diagnostics import startup_failure_reason
 from .repositories import AnalysisRepository, WeatherRepository
 from .repositories.base import DatabaseUnavailable
 from .repositories.weather import WEATHER_IDENTITY_FIELDS
@@ -23,6 +26,7 @@ class Database:
         if settings.mongodb_uri is None:
             raise DatabaseUnavailable()
         client = None
+        stage = 'client_configuration'
         try:
             client = MongoClient(
                 settings.mongodb_uri.get_secret_value(),
@@ -39,12 +43,18 @@ class Database:
             )
             database = cls(client, settings.mongodb_db, settings.mongodb_timeout_ms)
             with timeout(settings.mongodb_timeout_ms / 1000):
+                stage = 'ping'
                 database.db.command("ping")
+                stage = 'indexes'
                 database.ensure_indexes()
             return database
-        except (DatabaseUnavailable, PyMongoError, ValueError, OSError):
+        except (DatabaseUnavailable, PyMongoError, ValueError, OSError) as error:
             if client is not None:
                 client.close()
+            logging.getLogger('uvicorn.error').error(
+                'database_startup_failed stage=%s reason=%s timeout_ms=%d',
+                stage, startup_failure_reason(error), settings.mongodb_timeout_ms,
+            )
             # Do not preserve driver exception text or the connection string.
             raise DatabaseUnavailable() from None
 
