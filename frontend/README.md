@@ -1,3 +1,3 @@
-# Frontend phase 1
+# Frontend phase 2
 
-React/TypeScript/Vite shell, generated contract, validated client, and deliberate filter/request flow. Run `npm ci`, `npm test`, and `npm run build`. Configure the public VITE_API_BASE_URL only in ignored .env. Result presentation follows in phase 2. No fixture fallback is used.
+Dashboard presents backend metrics, charts, annual and event tables, insights, methodology, and provenance. Climate calculations remain in the backend. Zero, null, partial data, and uncertain boundaries remain distinct. Run `npm test` and `npm run build`; browser/accessibility integration is consolidated in phase 3.
